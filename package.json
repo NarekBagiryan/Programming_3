@@ -1,5 +1,5 @@
 {
-  "name": "test_heroku_gol",
+  "name": "Programming_3",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,14 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hanumanum/test-heroku-gol.git"
+    "url": "git+https://github.com/NarekBagiryan/Programming_3.git"
   },
-  "author": "hanuman",
+  "author": "NarekBagiryan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hanumanum/test-heroku-gol/issues"
   },
-  "homepage": "https://tumotestgol.herokuapp.com/",
   "dependencies": {
     "express": "^4.16.2"
   },
