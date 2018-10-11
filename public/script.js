@@ -79,25 +79,25 @@ function setup() {
                 var gr = new Grass(x, y, 1);
                 grassArr.push(gr);
             }
-            else if (matrix[y][x] == 2) {
-                var eat = new GrassEater(x, y, 2);
-                GrassEaterArr.push(eat);
-            }
-            else if (matrix[y][x] == 3) {
-                var gish = new Gishatich(x, y, 3);
-                GishatichArr.push(gish);
-            }
-            else if (matrix[y][x] == 4) {
-                var gishaker = new Gishatichaker(x, y, 4);
-                GishatichakerArr.push(gishaker);
-            }
-            else if (matrix[y][x] == 5) {
-                var gisheater = new GishatichEater(x, y, 5);
-                GishatichEaterArr.push(gisheater);
-            }
-            else if (matrix[y][x] == 8) {
+             else if (matrix[y][x] == 2) {
+                 var eat = new GrassEater(x, y, 2);
+                 GrassEaterArr.push(eat);
+             }
+            // else if (matrix[y][x] == 3) {
+            //     var gish = new Gishatich(x, y, 3);
+            //     GishatichArr.push(gish);
+            // }
+            // else if (matrix[y][x] == 4) {
+            //     var gishaker = new Gishatichaker(x, y, 4);
+            //     GishatichakerArr.push(gishaker);
+            // }
+            // else if (matrix[y][x] == 5) {
+            //     var gisheater = new GishatichEater(x, y, 5);
+            //     GishatichEaterArr.push(gisheater);
+            // }
+            // else if (matrix[y][x] == 8) {
 
-            }
+            //}
         }
     }
 }
@@ -138,10 +138,10 @@ function draw() {
         grassArr[i].mul();
     }
      for (var i in GrassEaterArr) {
-         GrassEaterArr[i].eat();       
+         GrassEaterArr[i].eat(1);       
      }
      for (var i in GishatichArr) {
-         GishatichArr[i].eat();       
+         GishatichArr[i].eat(2);       
      }
       for (var i in GishatichakerArr) {
           GishatichakerArr[i].eat();       
