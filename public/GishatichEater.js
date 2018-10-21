@@ -2,9 +2,10 @@ class GishatichEater {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
-        this.energy = 40;
+        this.energy = 80;
         this.index = index;
         this.multiply = 2;
+        this.gender = Math.round(Math.random());  // 0 - male, 1 - female
     }
     getNewCoordinates() {
         this.directions = [
@@ -101,7 +102,7 @@ class GishatichEater {
                 }
              }
             if (this.multiply == 5) {
-                this.mul();
+                this.searchMate();
                 this.multiply = 0;
             }
         }
@@ -111,7 +112,7 @@ class GishatichEater {
         }
     }
     mul() {
-        var emptyCells = this.chooseCell(1);
+        var emptyCells = this.chooseCell(0);
         var newCells = random(emptyCells);
         if (newCells) {
             var x = newCells[0];
@@ -119,8 +120,26 @@ class GishatichEater {
             matrix[y][x] = this.index;
             var Gishaker = new GishatichEater(x, y, 1);
             GishatichEaterArr.push(Gishaker);
-             var Gishaker = new Gishatichaker(x, y, 1);
-            GishatichakerArr.push(Gishaker);
+
+        }
+    }
+    searchMate()
+    {
+        var otherGrassCells = this.chooseCell(5);
+
+        for(var i in otherGrassCells)
+        {
+            var x = otherGrassCells[i].x;
+            var y = otherGrassCells[i].y;
+
+            for(var j in GishatichEaterArr)
+            {
+                if(GishatichEaterArr[j].x == x && GishatichEaterArr[j].y == y && this.gender != GishatichEaterArr[j].gender )
+                {
+                    this.mul();
+                    return;
+                }
+            }
         }
     }
     die() {

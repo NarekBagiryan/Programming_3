@@ -8,52 +8,79 @@ function randomMatrix(m, n) {
         }
     }
     matrix[35][2]=2;
-    matrix[40][60]=2;
-    matrix[18][51]=2;
-    matrix[40][40]=2;
-    matrix[15][48]=2;
-    matrix[58][96]=2;
+    matrix[37][2]=2;
+    matrix[32][2]=2;
+    matrix[33][2]=2;
+    matrix[31][2]=2;
+    matrix[30][2]=2;
+    matrix[29][2]=2;
+    matrix[38][2]=2;
+    matrix[39][2]=2;
+    matrix[40][2]=2;
+    matrix[42][2]=2;
+    matrix[44][2]=2;
+    matrix[45][2]=2;
+    matrix[46][2]=2;
+    matrix[47][2]=2;
+    matrix[48][2]=2;
+    matrix[49][2]=2;
+    matrix[46][80]=2;
+    matrix[50][80]=2;
+    matrix[51][80]=2;
+    matrix[52][80]=2;
+    matrix[53][80]=2;
+    matrix[54][80]=2;
+    matrix[55][80]=2;
+    matrix[56][80]=2;
+    matrix[57][80]=2;
+    matrix[58][80]=2;
+    matrix[59][80]=2;
+    matrix[60][80]=2;
 
-    matrix[74][74]=3;
-    matrix[65][21]=3;
-    matrix[58][74]=3;
-    matrix[24][35]=3;
-    matrix[68][86]=3;
-    matrix[25][96]=3;
+    matrix[74][50]=3;
+    matrix[73][50]=3;
+    matrix[72][50]=3;
+    matrix[71][50]=3;
+    matrix[70][50]=3;
+    matrix[69][50]=3;
+    matrix[68][50]=3;
+    matrix[67][50]=3;
     matrix[34][36]=3;
-    matrix[15][38]=3;
-    matrix[58][65]=3;
-    matrix[55][95]=3;
-    matrix[62][97]=3;
-    matrix[21][68]=3;
+    matrix[35][36]=3;
+    matrix[36][36]=3;
+    matrix[37][36]=3;
+    matrix[38][36]=3;
+    matrix[39][36]=3;
 
-    matrix[80][80]=4;
-    matrix[68][24]=4;
-    matrix[63][80]=4;
-    matrix[30][40]=4;
-    matrix[73][90]=4;
-    matrix[30][97]=4;
+    matrix[80][75]=4;
+    matrix[79][75]=4;
+    matrix[78][75]=4;
+    matrix[77][75]=4;
+    matrix[76][75]=4;
+    matrix[75][75]=4;
+    matrix[74][75]=4;
+    matrix[73][75]=4;
     matrix[38][40]=4;
-    matrix[20][43]=4;
-    matrix[63][66]=4;
-    matrix[60][96]=4;
-    matrix[65][98]=4;
-    matrix[22][69]=4;
+    matrix[40][40]=4;
+    matrix[41][40]=4;
+    matrix[42][40]=4;
+    matrix[43][40]=4;
+    matrix[44][40]=4;
 
-    matrix[66][60]=5;
-    matrix[23][73]=5;
-    matrix[80][84]=5;
-    matrix[68][28]=5;
-    matrix[63][82]=5;
-    matrix[30][38]=5;
-    matrix[73][94]=5;
-    matrix[30][86]=5;
-    matrix[38][35]=5;
-    matrix[20][40]=5;
-    matrix[63][64]=5;
-    matrix[60][90]=5;
-    matrix[65][80]=5;
-    matrix[22][72]=5;
+    matrix[66][65]=5;
+    matrix[65][65]=5;
+    matrix[64][65]=5;
+    matrix[63][65]=5;
+    matrix[62][65]=5;
+    matrix[61][65]=5;
+    matrix[60][65]=5;
+    matrix[59][65]=5;
+    matrix[38][95]=5;
+    matrix[39][95]=5;
+    matrix[40][95]=5;
+    matrix[41][95]=5;
+    matrix[42][95]=5;
+    matrix[43][95]=5;
     return matrix;
 
 }
@@ -83,21 +110,21 @@ function setup() {
                  var eat = new GrassEater(x, y, 2);
                  GrassEaterArr.push(eat);
              }
-            // else if (matrix[y][x] == 3) {
-            //     var gish = new Gishatich(x, y, 3);
-            //     GishatichArr.push(gish);
-            // }
-            // else if (matrix[y][x] == 4) {
-            //     var gishaker = new Gishatichaker(x, y, 4);
-            //     GishatichakerArr.push(gishaker);
-            // }
-            // else if (matrix[y][x] == 5) {
-            //     var gisheater = new GishatichEater(x, y, 5);
-            //     GishatichEaterArr.push(gisheater);
-            // }
-            // else if (matrix[y][x] == 8) {
+             else if (matrix[y][x] == 3) {
+                 var gish = new Gishatich(x, y, 3);
+                 GishatichArr.push(gish);
+             }
+             else if (matrix[y][x] == 4) {
+                 var gishaker = new Gishatichaker(x, y, 4);
+                 GishatichakerArr.push(gishaker);
+             }
+             else if (matrix[y][x] == 5) {
+                 var gisheater = new GishatichEater(x, y, 5);
+                 GishatichEaterArr.push(gisheater);
+             }
+             else if (matrix[y][x] == 8) {
 
-            //}
+            }
         }
     }
 }
@@ -134,6 +161,7 @@ function draw() {
         }
 
     }
+
      for (var i in grassArr) {
         grassArr[i].mul();
     }

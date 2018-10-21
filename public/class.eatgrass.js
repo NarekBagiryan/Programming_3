@@ -2,10 +2,10 @@ class GrassEater {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
-        this.energy = 10;
+        this.energy = 80;
         this.index = index;
-        this.multiply = 0;
-
+        //this.multiply = 0;
+        this.gender = Math.round(Math.random());  // 0 - male, 1 - female
     }
     getNewCoordinates() {
         this.directions = [
@@ -68,10 +68,10 @@ class GrassEater {
                     grassArr.splice(i, 1);
                 }
             }
-            if (this.multiply == 8) {
-                this.mul();
-                this.multiply = 0;
-            }
+            //if (this.multiply == 5 ) {
+                this.searchMate();
+                //this.multiply = 0;
+            //}
 
 
         }
@@ -81,7 +81,7 @@ class GrassEater {
         }
     }
     mul() {
-        var emptyCells = this.chooseCell(1);
+        var emptyCells = this.chooseCell(0);
         var newCells = random(emptyCells);
         if (newCells) {
             var x = newCells[0];
@@ -89,6 +89,26 @@ class GrassEater {
             matrix[y][x] = this.index;
             var newGrasseater = new GrassEater(newCells[0], newCells[1], this.index);
             GrassEaterArr.push(newGrasseater);
+        }
+    }
+
+    searchMate()
+    {
+        var otherGrassCells = this.chooseCell(2);
+
+        for(var i in otherGrassCells)
+        {
+            var x = otherGrassCells[i].x;
+            var y = otherGrassCells[i].y;
+
+            for(var j in GrassEaterArr)
+            {
+                if(GrassEaterArr[j].x == x && GrassEaterArr[j].y == y && this.gender != GrassEaterArr[j].gender )
+                {
+                    this.mul();
+                    return;
+                }
+            }
         }
     }
     die() {
