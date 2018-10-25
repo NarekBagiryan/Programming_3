@@ -1,5 +1,11 @@
+function getRandInt() {
+    var z = Math.floor(Math.random());
+    return z;
+}
+
 module.exports = class GrassEater {
-    constructor(x, y, index) {
+    constructor(x, y, index, matrix) {
+        this.matrix = matrix;
         this.x = x;
         this.y = y;
         this.energy = 80;
@@ -20,7 +26,7 @@ module.exports = class GrassEater {
         ];
     }
 
-    chooseCell(character) {
+    chooseCell(character, matrix) {
         this.getNewCoordinates();
         var found = [];
         for (var i in this.directions) {
@@ -34,9 +40,9 @@ module.exports = class GrassEater {
         }
         return found;
     }
-    move() {
-        var emptyCells = this.chooseCell(0);
-        var newCells = random(emptyCells);
+    move(matrix) {
+        var emptyCells = this.chooseCell(0, matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -51,9 +57,9 @@ module.exports = class GrassEater {
 
         }
     }
-    eat() {
-        var emptyCells = this.chooseCell(1);
-        var newCells = random(emptyCells);
+    eat(matrix) {
+        var emptyCells = this.chooseCell(1, matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -76,13 +82,13 @@ module.exports = class GrassEater {
 
         }
         else {
-            this.move();
+            this.move(matrix);
 
         }
     }
-    mul() {
-        var emptyCells = this.chooseCell(0);
-        var newCells = random(emptyCells);
+    mul(matrix) {
+        var emptyCells = this.chooseCell(0, matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -105,7 +111,7 @@ module.exports = class GrassEater {
             {
                 if(GrassEaterArr[j].x == x && GrassEaterArr[j].y == y && this.gender != GrassEaterArr[j].gender )
                 {
-                    this.mul();
+                    this.mul(matrix);
                     return;
                 }
             }

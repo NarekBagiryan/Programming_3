@@ -1,5 +1,11 @@
+function getRandInt() {
+    var z = Math.floor(Math.random());
+    return z;
+}
+
 module.exports = class Grass {
-    constructor(x, y, index) {
+    constructor(x, y, index, matrix) {
+        this.matrix = matrix;
         this.x = x;
         this.y = y;
         this.index = index;
@@ -16,7 +22,9 @@ module.exports = class Grass {
         ];
 
     }
-    chooseCell(character) {
+
+
+    chooseCell(character, matrix) {
         var found = [];
         for (var i in this.directions) {
             var x = this.directions[i][0];
@@ -30,14 +38,16 @@ module.exports = class Grass {
         }
         return found;
     }
-    mul() {
+    mul(matrix) {
         this.multiply++;
-        var newCell = random(this.chooseCell(0));
+        var newCell = getRandInt(this.chooseCell(0, matrix));
         //console.log(newCell, this.multiply);
         if (this.multiply >= 30 && newCell) {
             var newGrass = new Grass(newCell[0], newCell[1], this.index);
             grassArr.push(newGrass);
+            console.log(matrix[0]+"!!!!!!\n");
             matrix[newCell[1]][newCell[0]] = 1;
+            console.log(matrix[0]+"//////\n");
             this.multiply = 0;
         }
     }

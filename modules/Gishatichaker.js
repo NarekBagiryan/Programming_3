@@ -1,5 +1,11 @@
+function getRandInt() {
+    var z = Math.floor(Math.random());
+    return z;
+}
+
 module.exports = class Gishatichaker {
-    constructor(x, y, index) {
+    constructor(x, y, index, matrix) {
+        this.matrix = matrix;
         this.x = x;
         this.y = y;
         this.energy = 80;
@@ -35,14 +41,14 @@ module.exports = class Gishatichaker {
             [this.x + 2, this.y + 1]
         ]
     }
-    chooseCell(character1, character2,character3) {
+    chooseCell(character1,  matrix) {
         this.getNewCoordinates();
         var found = [];
         for (var i in this.directions) {
             var x = this.directions[i][0];
             var y = this.directions[i][1];
             if (y >= 0 && y < matrix.length && x >= 0 && x < matrix[0].length) {
-                if (matrix[y][x] == character1 || matrix[y][x] == character2 ||matrix[y][x] == character3)
+                if (matrix[y][x] == character1)
                  {
                     found.push(this.directions[i])
                 }
@@ -50,9 +56,9 @@ module.exports = class Gishatichaker {
         }
         return found;
     }
-    move() {
-        var emptyCells = this.chooseCell(0, 1);
-        var newCells = random(emptyCells);
+    move(matrix) {
+        var emptyCells = this.chooseCell(0, matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -74,9 +80,9 @@ module.exports = class Gishatichaker {
 
         }
     }
-    eat() {
-        var emptyCells = this.chooseCell(2,3);
-        var newCells = random(emptyCells);
+    eat(matrix) {
+        var emptyCells = this.chooseCell(3, matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -102,13 +108,13 @@ module.exports = class Gishatichaker {
             }
         }
         else {
-            this.move();
+            this.move(matrix);
 
         }
     }
-    mul() {
-        var emptyCells = this.chooseCell(0);
-        var newCells = random(emptyCells);
+    mul(matrix) {
+        var emptyCells = this.chooseCell(0, matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -119,7 +125,7 @@ module.exports = class Gishatichaker {
     }
     searchMate()
     {
-        var otherGrassCells = this.chooseCell(4);
+        var otherGrassCells = this.chooseCell(4, matrix);
 
         for(var i in otherGrassCells)
         {
@@ -130,7 +136,7 @@ module.exports = class Gishatichaker {
             {
                 if(GishatichakerArr[j].x == x && GishatichakerArr[j].y == y && this.gender != GishatichakerArr[j].gender )
                 {
-                    this.mul();
+                    this.mul(matrix);
                     return;
                 }
             }

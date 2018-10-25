@@ -1,5 +1,11 @@
+function getRandInt() {
+    var z = Math.floor(Math.random());
+    return z;
+}
+
 module.exports = class Gishatich {
-    constructor(x, y, index) {
+    constructor(x, y, index, matrix) {
+        this.matrix = matrix;
         this.x = x;
         this.y = y;
         this.energy = 80;
@@ -19,23 +25,23 @@ module.exports = class Gishatich {
             [this.x + 1, this.y + 1]
         ]
     }
-    chooseCell(character1, character2) {
+    chooseCell(character1,  matrix) {
         this.getNewCoordinates();
         var found = [];
         for (var i in this.directions) {
             var x = this.directions[i][0];
             var y = this.directions[i][1];
             if (y >= 0 && y < matrix.length && x >= 0 && x < matrix[0].length) {
-                if (matrix[y][x] == character1 || matrix[y][x] == character2) {
+                if (matrix[y][x] == character1) {
                     found.push(this.directions[i])
                 }
             }
         }
         return found;
     }
-    move() {
-        var emptyCells = this.chooseCell(0, 1);
-        var newCells = random(emptyCells);
+    move(matrix) {
+        var emptyCells = this.chooseCell(0,matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -57,9 +63,9 @@ module.exports = class Gishatich {
 
         }
     }
-    eat() {
-        var emptyCells = this.chooseCell(2);
-        var newCells = random(emptyCells);
+    eat(matrix) {
+        var emptyCells = this.chooseCell(2, matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -80,13 +86,13 @@ module.exports = class Gishatich {
             }
         }
         else {
-            this.move();
+            this.move(matrix);
 
         }
     }
-    mul() {
-        var emptyCells = this.chooseCell(0);
-        var newCells = random(emptyCells);
+    mul(matrix) {
+        var emptyCells = this.chooseCell(0, matrix);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -109,7 +115,7 @@ module.exports = class Gishatich {
             {
                 if(GishatichArr[j].x == x && GishatichArr[j].y == y && this.gender != GishatichArr[j].gender )
                 {
-                    this.mul();
+                    this.mul(matrix);
                     return;
                 }
             }

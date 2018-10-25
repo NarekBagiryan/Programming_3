@@ -18,7 +18,34 @@
     
 ///////////script.js///////
     
+    for (var y = 0; y < matrix.length; ++y) {
+        for (var x = 0; x < matrix[y].length; ++x) {
+            if (matrix[y][x] == 1) {
+                var gr = new Grass(x, y, 1);
+                grassArr.push(gr);
+            }
+            else if (matrix[y][x] == 2) {
+                var eat = new GrassEater(x, y, 2);
+                GrassEaterArr.push(eat);
+            }
+            else if (matrix[y][x] == 3) {
+                var gish = new Gishatich(x, y, 3);
+                GishatichArr.push(gish);
+            }
+            else if (matrix[y][x] == 4) {
+                var gishaker = new Gishatichaker(x, y, 4);
+                GishatichakerArr.push(gishaker);
+            }
+            else if (matrix[y][x] == 5) {
+                var gisheater = new GishatichEater(x, y, 5);
+                GishatichEaterArr.push(gisheater);
+            }
+            else if (matrix[y][x] == 8) {
 
+            }
+        }
+    }
+}
 ///////////script.js///////
     
    
