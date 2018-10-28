@@ -41,7 +41,7 @@ module.exports = class Gishatich {
     }
     move(matrix, GishatichArr) {
         var emptyCells = this.chooseCell(matrix, 0, 1);
-        var newCells = this.getRandInt(emptyCells);
+        var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
