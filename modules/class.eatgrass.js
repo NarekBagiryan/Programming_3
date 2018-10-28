@@ -74,10 +74,10 @@ module.exports = class GrassEater {
                     grassArr.splice(i, 1);
                 }
             }
-            //if (this.multiply == 5 ) {
+            if (this.multiply == 5 ) {
                 this.searchMate(matrix, GrassEaterArr);
                 //this.multiply = 0;
-            //}
+            }
 
 
         }

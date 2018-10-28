@@ -10,7 +10,7 @@ module.exports = class Gishatichaker {
         this.y = y;
         this.energy = 80;
         this.index = index;
-        this.multiply = 2;
+        this.multiply = 5;
         this.gender = Math.round(Math.random());  // 0 - male, 1 - female
     }
     getNewCoordinates() {
@@ -102,9 +102,9 @@ module.exports = class Gishatichaker {
                     GrassEaterArr.splice(i, 1);
                 }
              }
-            if (this.multiply == 3) {
+            if (this.multiply == 5) {
                 this.searchMate(matrix, GishatichakerArr);
-                this.multiply = 0;
+                this.multiply = 3;
             }
         }
         else {

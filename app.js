@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var fs = require('fs');
 
 var grassArr = [];
 var GrassEaterArr = [];
@@ -23,6 +24,7 @@ app.get("/", function (req, res) {
 });
 
 server.listen(3000);
+
 
 
 for (var y = 0; y < matrix.length; ++y) {
@@ -54,12 +56,29 @@ for (var y = 0; y < matrix.length; ++y) {
 }
 
 
+var Stat = 
+{
+
+    "Grass": grassArr.length,
+    "GrassEater": GrassEaterArr.length,
+    "Gishatich": GishatichArr.length,
+    "Gishatichaker": GishatichakerArr.length,
+    "GishatichEater": GishatichEaterArr.length,
+};
+
+function main() {
+    var JSO = JSON.stringify(Stat);
+    fs.writeFileSync("obj.json", JSO);
+ }
+ main();
+
 var frameCount = 5;
 
 var drawTime = 1000 / frameCount;
 
 io.on('connection', function (socket) {
   socket.emit('matrix', matrix);
+  socket.emit("Text", Stat);
 
   var inter = setInterval(function () {
     for (var i in grassArr) {
