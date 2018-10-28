@@ -3,15 +3,6 @@ var socket;
 var matrix;
 var stat;
 var margin = 50;
-var exanak = "Winter";
-
-
-/*setInterval(function(){
-    if(exanak == "winter"){
-        exanak = "summer";
-        console.log(exanak);
-    }
-},3000);*/
 
 function setup() {
   
@@ -19,7 +10,7 @@ function setup() {
     socket = io.connect();
     socket.on('matrix', function (mtx) {
         matrix = mtx;
-        createCanvas(matrix[0].length * side + 600, matrix.length * side);
+        createCanvas(matrix[0].length * side + 700, matrix.length * side);
         noLoop();
 
         socket.on('redraw', function (mtx) {
@@ -70,7 +61,7 @@ function draw() {
     for(var i in stat){
         fill(0, 0, 0);
         textSize(20);
-        text(i + ":"+ stat[i], 520, margin)
+        text(i + ":"+ " "+ stat[i], 520, margin)
         margin+=40;
     }
     margin = 40;

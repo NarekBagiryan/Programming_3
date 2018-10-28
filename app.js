@@ -55,15 +55,14 @@ for (var y = 0; y < matrix.length; ++y) {
   }
 }
 
-
 var Stat = 
 {
-
+    "Season":"Winter",
     "Grass": grassArr.length,
     "GrassEater": GrassEaterArr.length,
     "Gishatich": GishatichArr.length,
     "Gishatichaker": GishatichakerArr.length,
-    "GishatichEater": GishatichEaterArr.length,
+    "GishatichEater": GishatichEaterArr.length
 };
 
 function main() {
@@ -72,15 +71,28 @@ function main() {
  }
  main();
 
+
 var frameCount = 5;
 
 var drawTime = 1000 / frameCount;
+var FC = 0;
 
 io.on('connection', function (socket) {
+
   socket.emit('matrix', matrix);
   socket.emit("Text", Stat);
 
   var inter = setInterval(function () {
+    FC++;
+    if(FC % 15 == 0)
+    {
+      if(Stat['Season'] == "Winter"){
+        Stat['Season'] = "Summer";
+      }
+      else Stat['Season'] = "Winter";
+  
+      socket.emit("Text", Stat);
+    }
     for (var i in grassArr) {
       grassArr[i].mul(matrix, grassArr);
     }
