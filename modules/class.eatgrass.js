@@ -40,7 +40,7 @@ module.exports = class GrassEater {
         }
         return found;
     }
-    move(matrix, GrassEaterArr) {
+    move(matrix, GrassEaterArr, GrassEaterLiveArr) {
         var emptyCells = this.chooseCell(0, matrix);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
@@ -52,12 +52,12 @@ module.exports = class GrassEater {
             this.y = y;
             this.energy--;
             if (this.energy < 1) {
-                this.die(matrix, GrassEaterArr);
+                this.die(matrix, GrassEaterArr, GrassEaterLiveArr);
             }
 
         }
     }
-    eat(matrix, grassArr, GrassEaterArr) {
+    eat(matrix, grassArr, GrassEaterArr,GrassLiveArr,GrassEaterLiveArr) {
         var emptyCells = this.chooseCell(1, matrix);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
@@ -72,17 +72,20 @@ module.exports = class GrassEater {
             for (var i in grassArr) {
                 if (x == grassArr[i].x && y == grassArr[i].y) {
                     grassArr.splice(i, 1);
+                    GrassLiveArr[1]++;
                 }
             }
             if (this.multiply == 5 ) {
                 this.searchMate(matrix, GrassEaterArr);
-                //this.multiply = 0;
+                this.multiply = 0;
+                GrassEaterLiveArr[0]++;
+
             }
 
 
         }
         else {
-            this.move(matrix, GrassEaterArr);
+            this.move(matrix, GrassEaterArr, GrassEaterLiveArr);
 
         }
     }
@@ -117,12 +120,13 @@ module.exports = class GrassEater {
             }
         }
     }
-    die(matrix, GrassEaterArr) {
+    die(matrix, GrassEaterArr, GrassEaterLiveArr) {
         for (var i in GrassEaterArr) {
             if (this.x == GrassEaterArr[i].x && this.y == GrassEaterArr[i].y) {
                 GrassEaterArr.splice(i, 1);
             }
         }
         matrix[this.y][this.x] = 0;
+        GrassEaterLiveArr[1]++;
     }
 }

@@ -54,6 +54,15 @@ function randomMatrix(m, n) {
     matrix[37][36]=3;
     matrix[38][36]=3;
     matrix[39][36]=3;
+    matrix[37][50]=3;
+    matrix[36][50]=3;
+    matrix[35][50]=3;
+    matrix[34][36]=3;
+    matrix[33][36]=3;
+    matrix[32][36]=3;
+    matrix[31][36]=3;
+    matrix[30][36]=3;
+    matrix[29][36]=3;
 
     matrix[80][75]=4;
     matrix[79][75]=4;
@@ -69,6 +78,17 @@ function randomMatrix(m, n) {
     matrix[42][40]=4;
     matrix[43][40]=4;
     matrix[44][40]=4;
+    matrix[35][75]=4;
+    matrix[36][75]=4;
+    matrix[75][75]=4;
+    matrix[34][75]=4;
+    matrix[33][75]=4;
+    matrix[32][40]=4;
+    matrix[30][40]=4;
+    matrix[29][40]=4;
+    matrix[28][40]=4;
+    matrix[37][40]=4;
+    matrix[15][40]=4;
 
     matrix[66][65]=5;
     matrix[65][65]=5;
@@ -84,6 +104,20 @@ function randomMatrix(m, n) {
     matrix[41][95]=5;
     matrix[42][95]=5;
     matrix[43][95]=5;
+    matrix[35][65]=5;
+    matrix[34][65]=5;
+    matrix[33][65]=5;
+    matrix[32][65]=5;
+    matrix[31][65]=5;
+    matrix[30][65]=5;
+    matrix[29][65]=5;
+    matrix[28][65]=5;
+    matrix[27][95]=5;
+    matrix[26][95]=5;
+    matrix[25][95]=5;
+    matrix[24][95]=5;
+    matrix[23][95]=5;
+    matrix[22][95]=5;
 
     return matrix;
 }

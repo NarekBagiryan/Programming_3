@@ -5,10 +5,20 @@ var io = require('socket.io')(server);
 var fs = require('fs');
 
 var grassArr = [];
+var GrassLiveArr = [0,0];
+
 var GrassEaterArr = [];
+var GrassEaterLiveArr = [0,0];
+
 var GishatichArr = [];
+var GishatichLiveArr = [0,0];
+
 var GishatichakerArr = [];
+var GishaticakerhLiveArr = [0,0];
+
 var GishatichEaterArr = [];
+var GishatichEaterLiveArr = [0,0];
+
 
 var matrix = require('./modules/matrix');
 var Grass = require('./modules/class.grass');
@@ -16,6 +26,13 @@ var GrassEater = require('./modules/class.eatgrass');
 var Gishatich = require('./modules/Gishatich');
 var Gishatichaker = require('./modules/Gishatichaker');
 var GishatichEater = require('./modules/GishatichEater');
+
+GrassLiveArr[0]+= grassArr.length;
+GrassEaterLiveArr[0]+= GrassEaterArr.length;
+GishatichLiveArr[0]+=GishatichArr.length;
+GishaticakerhLiveArr[0]+=GishatichakerArr.length;
+GishatichEaterLiveArr[0]+=GishatichEaterArr.length
+
 
 app.use(express.static("."));
 
@@ -62,7 +79,17 @@ var Stat =
     "GrassEater": GrassEaterArr.length,
     "Gishatich": GishatichArr.length,
     "Gishatichaker": GishatichakerArr.length,
-    "GishatichEater": GishatichEaterArr.length
+    "GishatichEater": GishatichEaterArr.length,
+    "GrassLive": GrassLiveArr[0],
+    "GrassDied": GrassLiveArr[1],
+    "GrassEaterLive":GrassEaterLiveArr[0],
+    "GrassEaterDead":GrassEaterLiveArr[1],
+    "GishatichLive": GishatichLiveArr[0],
+    "GishatichDead": GishatichLiveArr[1],
+    "GishaticakerhLive": GishaticakerhLiveArr[0],
+    "GishaticakerhDead": GishaticakerhLiveArr[1],
+    "GishatichEaterLive":GishatichEaterLiveArr[0],
+    "GishatichEaterDead":GishatichEaterLiveArr[1]
 };
 
 function main() {
@@ -75,8 +102,9 @@ function main() {
 var frameRate = 5;
 var frameCount = 0;
 
+
 var drawTime = 1000 / frameRate;
-var FC = 0;
+//var FC = 0;
 
 io.on('connection', function (socket) {
 
@@ -84,32 +112,32 @@ io.on('connection', function (socket) {
   socket.emit("Text", Stat);
 
   var inter = setInterval(function () {
-    FC++;
+    //FC++;
     frameCount++;
 
-    if(FC % 15 == 0)
-    {
+    /*if(FC % 15 == 0)
+   {
       if(Stat['Season'] == "Winter"){
         Stat['Season'] = "Summer";
       }
       else Stat['Season'] = "Winter";
   
       socket.emit("Text", Stat);
-    }
+    }*/
     for (var i in grassArr) {
-      grassArr[i].mul(matrix, grassArr);
+      grassArr[i].mul(matrix, grassArr, GrassLiveArr);
     }
     for (var i in GrassEaterArr) {
-      GrassEaterArr[i].eat(matrix, grassArr, GrassEaterArr)
+      GrassEaterArr[i].eat(matrix, grassArr, GrassEaterArr,GrassLiveArr,GrassEaterLiveArr)
     }
     for (var i in GishatichArr) {
-      GishatichArr[i].eat(matrix, GrassEaterArr, GishatichArr);
+      GishatichArr[i].eat(matrix, GrassEaterArr, GishatichArr, GishatichLiveArr, GrassEaterLiveArr);
     }
     for (var i in GishatichakerArr) {
-      GishatichakerArr[i].eat(matrix, GishatichakerArr, GrassEaterArr, GishatichArr);
+      GishatichakerArr[i].eat(matrix, GishatichakerArr, GrassEaterArr, GishatichArr, GishatichLiveArr, GishaticakerhLiveArr);
     }
     for (var i in GishatichEaterArr) {
-      GishatichEaterArr[i].eat(matrix, GishatichEaterArr, GishatichakerArr, GrassEaterArr, GishatichArr);
+      GishatichEaterArr[i].eat(matrix, GishatichEaterArr, GishatichakerArr, GrassEaterArr, GishatichArr, GishaticakerhLiveArr, GishatichEaterLiveArr);
     }
 
     socket.emit('redraw', matrix);
@@ -117,12 +145,22 @@ io.on('connection', function (socket) {
     if(frameCount >= 60){
       Stat = 
         {
-            "Season":"Winter",
-            "Grass": grassArr.length,
-            "GrassEater": GrassEaterArr.length,
-            "Gishatich": GishatichArr.length,
-            "Gishatichaker": GishatichakerArr.length,
-            "GishatichEater": GishatichEaterArr.length
+          "Season":"Winter",
+          "Grass": grassArr.length,
+          "GrassEater": GrassEaterArr.length,
+          "Gishatich": GishatichArr.length,
+          "Gishatichaker": GishatichakerArr.length,
+          "GishatichEater": GishatichEaterArr.length,
+          "GrassLive": GrassLiveArr[0],
+          "GrassDied": GrassLiveArr[1],
+          "GrassEaterLive":GrassEaterLiveArr[0],
+          "GrassEaterDead":GrassEaterLiveArr[1],
+          "GishatichLive": GishatichLiveArr[0],
+          "GishatichDead": GishatichLiveArr[1],
+          "GishaticakerhLive": GishaticakerhLiveArr[0],
+          "GishaticakerhDead": GishaticakerhLiveArr[1],
+          "GishatichEaterLive":GishatichEaterLiveArr[0],
+          "GishatichEaterDead":GishatichEaterLiveArr[1]
         };
 
       socket.emit("Text", Stat);

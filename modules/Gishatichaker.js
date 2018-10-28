@@ -56,7 +56,7 @@ module.exports = class Gishatichaker {
         }
         return found;
     }
-    move(matrix, GishatichakerArr) {
+    move(matrix, GishatichakerArr, GishaticakerhLiveArr) {
         var emptyCells = this.chooseCell(matrix,0, 1);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
@@ -75,12 +75,12 @@ module.exports = class Gishatichaker {
             this.y = y;
             this.energy--;
             if (this.energy == 0) {
-                this.die(matrix, GishatichakerArr);
+                this.die(matrix, GishatichakerArr, GishaticakerhLiveArr);
             }
 
         }
     }
-    eat(matrix, GishatichakerArr, GrassEaterArr, GishatichArr) {
+    eat(matrix, GishatichakerArr, GrassEaterArr, GishatichArr, GishatichLiveArr, GishaticakerhLiveArr) {
         var emptyCells = this.chooseCell(matrix,3);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
@@ -95,6 +95,7 @@ module.exports = class Gishatichaker {
             for (var i in GishatichArr) {
                 if (x == GishatichArr[i].x && y == GishatichArr[i].y) {
                     GishatichArr.splice(i, 1);
+                    GishatichLiveArr[1]++;
                 }
             }
              for (var i in GrassEaterArr) {
@@ -102,13 +103,14 @@ module.exports = class Gishatichaker {
                     GrassEaterArr.splice(i, 1);
                 }
              }
-            if (this.multiply == 5) {
+           // if (this.multiply == 5) {
                 this.searchMate(matrix, GishatichakerArr);
-                this.multiply = 3;
-            }
+                GishaticakerhLiveArr[0]++;
+              //  this.multiply = 3;
+           // }
         }
         else {
-            this.move(matrix, GishatichakerArr);
+            this.move(matrix, GishatichakerArr, GishaticakerhLiveArr);
 
         }
     }
@@ -142,12 +144,13 @@ module.exports = class Gishatichaker {
             }
         }
     }
-    die(matrix, GishatichakerArr) {
+    die(matrix, GishatichakerArr, GishaticakerhLiveArr) {
         for (var i in GishatichakerArr) {
             if (this.x == GishatichakerArr[i].x && this.y == GishatichakerArr[i].y) {
                 GishatichakerArr.splice(i, 1);
             }
         }
         matrix[this.y][this.x] = 0;
+        GishaticakerhLiveArr[1]++;
     }
 }

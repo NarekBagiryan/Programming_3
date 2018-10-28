@@ -38,7 +38,7 @@ module.exports = class Grass {
         }
         return found;
     }
-    mul(matrix, grassArr) {
+    mul(matrix, grassArr, GrassLiveArr) {
         this.multiply++;
         var newCell = getRandInt(this.chooseCell(0, matrix));
        
@@ -49,6 +49,7 @@ module.exports = class Grass {
             matrix[newCell[1]][newCell[0]] = 1;
        
             this.multiply = 0;
+            GrassLiveArr[0]++;
         }
     }
 }
