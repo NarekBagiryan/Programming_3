@@ -28,6 +28,7 @@ function setup() {
 }
 
 function draw() {
+    var collor = 0;
     background('#acacac');
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -65,4 +66,5 @@ function draw() {
         margin+=40;
     }
     margin = 40;
+
 }

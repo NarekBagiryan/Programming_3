@@ -72,9 +72,10 @@ function main() {
  main();
 
 
-var frameCount = 5;
+var frameRate = 5;
+var frameCount = 0;
 
-var drawTime = 1000 / frameCount;
+var drawTime = 1000 / frameRate;
 var FC = 0;
 
 io.on('connection', function (socket) {
@@ -84,6 +85,8 @@ io.on('connection', function (socket) {
 
   var inter = setInterval(function () {
     FC++;
+    frameCount++;
+
     if(FC % 15 == 0)
     {
       if(Stat['Season'] == "Winter"){
@@ -108,6 +111,23 @@ io.on('connection', function (socket) {
     for (var i in GishatichEaterArr) {
       GishatichEaterArr[i].eat(matrix, GishatichEaterArr, GishatichakerArr, GrassEaterArr, GishatichArr);
     }
+
     socket.emit('redraw', matrix);
+
+    if(frameCount >= 60){
+      Stat = 
+        {
+            "Season":"Winter",
+            "Grass": grassArr.length,
+            "GrassEater": GrassEaterArr.length,
+            "Gishatich": GishatichArr.length,
+            "Gishatichaker": GishatichakerArr.length,
+            "GishatichEater": GishatichEaterArr.length
+        };
+
+      socket.emit("Text", Stat);
+
+      frameCount = 0;
+    }
   }, drawTime);
 });
