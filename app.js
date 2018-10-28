@@ -50,7 +50,6 @@ for (var y = 0; y < matrix.length; ++y) {
       else if (matrix[y][x] == 8) {
 
       }
-      //console.log(grassArr.length);
   }
 }
 
@@ -64,20 +63,20 @@ io.on('connection', function (socket) {
 
   var inter = setInterval(function () {
     for (var i in grassArr) {
-      grassArr[i].mul(matrix);
+      grassArr[i].mul(matrix, grassArr);
     }
-    /*for (var i in GrassEaterArr) {
-      GrassEaterArr[i].eat(matrix);
+    for (var i in GrassEaterArr) {
+      GrassEaterArr[i].eat(matrix, grassArr, GrassEaterArr)
     }
     for (var i in GishatichArr) {
-      GishatichArr[i].eat(matrix);
+      GishatichArr[i].eat(matrix, GrassEaterArr, GishatichArr);
     }
     for (var i in GishatichakerArr) {
-      GishatichakerArr[i].eat(matrix);
+      GishatichakerArr[i].eat(matrix, GishatichakerArr, GrassEaterArr, GishatichArr);
     }
     for (var i in GishatichEaterArr) {
-      GishatichEaterArr[i].eat(matrix);
-    }*/
+      GishatichEaterArr[i].eat(matrix, GishatichEaterArr, GishatichakerArr, GrassEaterArr, GishatichArr);
+    }
     socket.emit('redraw', matrix);
   }, drawTime);
 });

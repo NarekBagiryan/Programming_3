@@ -1,5 +1,5 @@
-function getRandInt() {
-    var z = Math.floor(Math.random());
+function getRandInt(arr) {
+    var z = arr[Math.floor(Math.random() * arr.length)];
     return z;
 }
 
@@ -40,7 +40,7 @@ module.exports = class GrassEater {
         }
         return found;
     }
-    move(matrix) {
+    move(matrix, GrassEaterArr) {
         var emptyCells = this.chooseCell(0, matrix);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
@@ -52,12 +52,12 @@ module.exports = class GrassEater {
             this.y = y;
             this.energy--;
             if (this.energy < 1) {
-                this.die();
+                this.die(matrix, GrassEaterArr);
             }
 
         }
     }
-    eat(matrix) {
+    eat(matrix, grassArr, GrassEaterArr) {
         var emptyCells = this.chooseCell(1, matrix);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
@@ -75,18 +75,18 @@ module.exports = class GrassEater {
                 }
             }
             //if (this.multiply == 5 ) {
-                this.searchMate();
+                this.searchMate(matrix, GrassEaterArr);
                 //this.multiply = 0;
             //}
 
 
         }
         else {
-            this.move(matrix);
+            this.move(matrix, GrassEaterArr);
 
         }
     }
-    mul(matrix) {
+    mul(matrix, GrassEaterArr) {
         var emptyCells = this.chooseCell(0, matrix);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
@@ -98,9 +98,9 @@ module.exports = class GrassEater {
         }
     }
 
-    searchMate()
+    searchMate(matrix, GrassEaterArr)
     {
-        var otherGrassCells = this.chooseCell(2);
+        var otherGrassCells = this.chooseCell(2, matrix);
 
         for(var i in otherGrassCells)
         {
@@ -111,13 +111,13 @@ module.exports = class GrassEater {
             {
                 if(GrassEaterArr[j].x == x && GrassEaterArr[j].y == y && this.gender != GrassEaterArr[j].gender )
                 {
-                    this.mul(matrix);
+                    this.mul(matrix, GrassEaterArr);
                     return;
                 }
             }
         }
     }
-    die() {
+    die(matrix, GrassEaterArr) {
         for (var i in GrassEaterArr) {
             if (this.x == GrassEaterArr[i].x && this.y == GrassEaterArr[i].y) {
                 GrassEaterArr.splice(i, 1);

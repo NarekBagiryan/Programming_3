@@ -1,5 +1,5 @@
-function getRandInt() {
-    var z = Math.floor(Math.random());
+function getRandInt(arr) {
+    var z = arr[Math.floor(Math.random() * arr.length)];
     return z;
 }
 
@@ -38,16 +38,16 @@ module.exports = class Grass {
         }
         return found;
     }
-    mul(matrix) {
+    mul(matrix, grassArr) {
         this.multiply++;
         var newCell = getRandInt(this.chooseCell(0, matrix));
-        //console.log(newCell, this.multiply);
+       
         if (this.multiply >= 30 && newCell) {
             var newGrass = new Grass(newCell[0], newCell[1], this.index);
             grassArr.push(newGrass);
-            console.log(matrix[0]+"!!!!!!\n");
+           
             matrix[newCell[1]][newCell[0]] = 1;
-            console.log(matrix[0]+"//////\n");
+       
             this.multiply = 0;
         }
     }

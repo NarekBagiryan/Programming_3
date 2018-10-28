@@ -1,5 +1,5 @@
-function getRandInt() {
-    var z = Math.floor(Math.random());
+function getRandInt(arr) {
+    var z = arr[Math.floor(Math.random() * arr.length)];
     return z;
 }
 
@@ -25,23 +25,23 @@ module.exports = class Gishatich {
             [this.x + 1, this.y + 1]
         ]
     }
-    chooseCell(character1,  matrix) {
+    chooseCell(matrix, character1, character2) {
         this.getNewCoordinates();
         var found = [];
         for (var i in this.directions) {
             var x = this.directions[i][0];
             var y = this.directions[i][1];
             if (y >= 0 && y < matrix.length && x >= 0 && x < matrix[0].length) {
-                if (matrix[y][x] == character1) {
+                if (matrix[y][x] == character1 || matrix[y][x] == character2) {
                     found.push(this.directions[i])
                 }
             }
         }
         return found;
     }
-    move(matrix) {
-        var emptyCells = this.chooseCell(0,matrix);
-        var newCells = getRandInt(emptyCells);
+    move(matrix, GishatichArr) {
+        var emptyCells = this.chooseCell(matrix, 0, 1);
+        var newCells = this.getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
             var y = newCells[1];
@@ -58,13 +58,13 @@ module.exports = class Gishatich {
             this.y = y;
             this.energy--;
             if (this.energy == 0) {
-                this.die();
+                this.die(matrix, GishatichArr);
             }
 
         }
     }
-    eat(matrix) {
-        var emptyCells = this.chooseCell(2, matrix);
+    eat(matrix, GrassEaterArr, GishatichArr) {
+        var emptyCells = this.chooseCell(matrix,2);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
@@ -81,17 +81,17 @@ module.exports = class Gishatich {
                 }
             }
             if (this.multiply == 3) {
-                this.searchMate();
+                this.searchMate(matrix, GishatichArr);
                 this.multiply = 0;
             }
         }
         else {
-            this.move(matrix);
+            this.move(matrix, GishatichArr);
 
         }
     }
-    mul(matrix) {
-        var emptyCells = this.chooseCell(0, matrix);
+    mul(matrix, GishatichArr) {
+        var emptyCells = this.chooseCell(matrix, 0);
         var newCells = getRandInt(emptyCells);
         if (newCells) {
             var x = newCells[0];
@@ -102,9 +102,9 @@ module.exports = class Gishatich {
           
         }
     }
-    searchMate()
+    searchMate(matrix, GishatichArr)
     {
-        var otherGrassCells = this.chooseCell(3);
+        var otherGrassCells = this.chooseCell(matrix,3);
 
         for(var i in otherGrassCells)
         {
@@ -115,13 +115,13 @@ module.exports = class Gishatich {
             {
                 if(GishatichArr[j].x == x && GishatichArr[j].y == y && this.gender != GishatichArr[j].gender )
                 {
-                    this.mul(matrix);
+                    this.mul(matrix, GishatichArr);
                     return;
                 }
             }
         }
     }
-    die() {
+    die(matrix, GishatichArr) {
         for (var i in GishatichArr) {
             if (this.x == GishatichArr[i].x && this.y == GishatichArr[i].y) {
                 GishatichArr.splice(i, 1);
