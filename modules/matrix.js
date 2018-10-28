@@ -10,10 +10,10 @@ function randomMatrix(m, n) {
     }
 
 
-    matrix[35][2]=2;
-    matrix[37][2]=2;
-    matrix[32][2]=2;
-    matrix[33][2]=2;
+    // matrix[35][2]=2;
+    // matrix[37][2]=2;
+    // matrix[32][2]=2;
+    // matrix[33][2]=2;
     matrix[31][2]=2;
     matrix[30][2]=2;
     matrix[29][2]=2;

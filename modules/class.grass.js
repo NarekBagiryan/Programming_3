@@ -42,7 +42,7 @@ module.exports = class Grass {
         this.multiply++;
         var newCell = getRandInt(this.chooseCell(0, matrix));
        
-        if (this.multiply >= 30 && newCell) {
+        if (this.multiply >= 50 && newCell) {
             var newGrass = new Grass(newCell[0], newCell[1], this.index);
             grassArr.push(newGrass);
            

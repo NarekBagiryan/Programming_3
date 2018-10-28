@@ -3,6 +3,16 @@ var socket;
 var matrix;
 var stat;
 var margin = 50;
+var exanak = "Winter";
+
+
+/*setInterval(function(){
+    if(exanak == "winter"){
+        exanak = "summer";
+        console.log(exanak);
+    }
+},3000);*/
+
 function setup() {
   
     frameRate(0);
